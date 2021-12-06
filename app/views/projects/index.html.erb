@@ -1,0 +1,35 @@
+<h1>Project List</h1>
+<% @projects.each do |project| %>
+  <%= turbo_frame_tag dom_id(project), src: project_path(project) %>
+<% end %>
+
+<h1>Project Table</h1>
+
+<table class='table'>
+  <thead>
+    <th>Name</th>
+    <th>Active</th>
+
+    <th colspan=3>Actions</th>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.active %></td>
+
+        <td><%= link_to "Show", project_path(project) %></td>
+        <td><%= link_to "Edit", edit_project_path(project) %></td>
+        <td>
+          <%= link_to "Delete", project_path(project),
+            "data-turbo-method": :delete,
+            "data-turbo-confirm": "Are you sure?" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "New project", new_project_path %>
